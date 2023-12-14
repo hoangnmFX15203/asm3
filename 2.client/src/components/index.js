@@ -9,6 +9,7 @@ export { default as SelectOption } from './search/SelectOption';
 export { default as DealDaily } from './products/DealDaily';
 export { default as CountDown } from './common/CountDown';
 export { default as FeatureProducts } from './products/FeatureProducts';
+export { default as Cart } from './products/Cart';
 export { default as ProductCard } from './products/ProductCard';
 export { default as CustomSlider } from './common/CustomSlider';
 export { default as TopHeader } from './header/TopHeader';
@@ -27,4 +28,3 @@ export { default as MarkdownEditor } from './input/MarkdownEditor';
 export { default as Pagination } from './pagination/Pagination';
 export { default as PagiItem } from './pagination/PagiItem';
 export { default as MemberSidebar } from './Sidebar/MemberSidebar';
-

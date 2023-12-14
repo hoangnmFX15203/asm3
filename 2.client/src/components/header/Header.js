@@ -1,11 +1,13 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, memo } from 'react';
 import logo from '../../assets/logo.png';
 import icons from '../../ultils/icons';
 import { Link } from 'react-router-dom';
 import path from '../../ultils/path';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from 'store/user/userSlice';
-import { BsCartCheckFill } from "react-icons/bs";
+import { BsCartCheckFill } from 'react-icons/bs';
+import withBaseComponent from './../../hocs/withBaseComponent';
+import { showCart } from 'store/app/appSlice';
 
 const { BsFillTelephoneFill, MdEmail, FaUser, BsBagPlusFill } = icons;
 const Header = () => {
@@ -25,7 +27,7 @@ const Header = () => {
     useEffect(() => {
         const handleClickOutsideOption = (e) => {
             const profile = document.getElementById('profile');
-            if (!profile?.contains(e.target)) setIsShowOption(false)
+            if (!profile?.contains(e.target)) setIsShowOption(false);
         };
 
         document.addEventListener('click', handleClickOutsideOption);
@@ -60,14 +62,21 @@ const Header = () => {
                 </div>
                 {current && (
                     <Fragment>
-                        <div className="cursor-pointer flex items-center px-6 border-r justify-center gap-2">
+                        <div
+                            onClick={() => dispatch(showCart())}
+                            className="cursor-pointer flex items-center px-6 border-r justify-center gap-2"
+                        >
                             <BsBagPlusFill color="red" />
-                            <span>{`${current?.cart?.length || 0} item(s)`}</span>
+                            <span>{`${
+                                current?.cart?.length || 0
+                            } item(s)`}</span>
                         </div>
                         <div
                             className="flex items-center justify-center px-6 gap-2 cursor-pointer relative"
                             id="profile"
-                            onClick={() => {setIsShowOption((prev) => !prev)}}
+                            onClick={() => {
+                                setIsShowOption((prev) => !prev);
+                            }}
                         >
                             <FaUser color="red" />
                             <span>Profile</span>
@@ -103,4 +112,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default withBaseComponent(memo(Header));

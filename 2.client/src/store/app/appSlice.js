@@ -6,11 +6,15 @@ export const appSlice = createSlice({
     initialState: {
         categories: null,
         isLoading: false,
+        isShowCart: false,
     },
     reducer: {
         // logout: (state) => {
         //     state.isLoading = false;
         // },
+        showCart: (state, action) => {
+            state.isShowCart = state.isShowCart === false ? true : false;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(actions.getCategories.pending, (state) => {
@@ -54,6 +58,6 @@ export const appSlice = createSlice({
     // },
 });
 
-export const {} = appSlice.actions;
+export const { showCart } = appSlice.actions;
 
 export default appSlice.reducer;

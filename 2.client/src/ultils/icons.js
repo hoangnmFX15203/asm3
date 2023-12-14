@@ -6,7 +6,7 @@ import {
     BsFillReplyFill,
     BsCartPlus,
 } from 'react-icons/bs';
-import { MdEmail, MdGroup } from 'react-icons/md';
+import { MdEmail, MdGroup, MdClose } from 'react-icons/md';
 import { FaUser, FaTty } from 'react-icons/fa';
 import {
     AiFillHome,
@@ -46,6 +46,7 @@ const icons = {
     RiBillLine,
     RiDeleteBin2Fill,
     BsCartPlus,
+    MdClose
 };
 
 export default icons;

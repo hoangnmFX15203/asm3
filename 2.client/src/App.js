@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Router, Route, Routes } from 'react-router-dom';
 import {
     Login,
@@ -22,14 +22,21 @@ import { MemberLayout, Personal, History, MyCart } from './pages/member';
 import { StaffLayout } from './pages/staff';
 import path from './ultils/path';
 import { getCategories } from './store/app/asyncAction';
+import Cart from './components/products/Cart';
 
 function App() {
+    const { isShowCart } = useSelector((state) => state.app);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getCategories());
     }, []);
     return (
-        <div className="min-h-screen font-main">
+        <div className="min-h-screen font-main relative">
+            {isShowCart && (
+                <div className="absolute inset-0 bg-overlay z-50 flex justify-end">
+                    <Cart />
+                </div>
+            )}
             <Routes>
                 <Route path={path.PUBLIC} element={<Public />}>
                     <Route path={path.HOME} element={<Home />} />

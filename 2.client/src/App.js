@@ -9,6 +9,7 @@ import {
     Services,
     DetailProduct,
     Products,
+    DetailCart
 } from './pages/public';
 import {
     AdminLayout,
@@ -23,6 +24,7 @@ import { StaffLayout } from './pages/staff';
 import path from './ultils/path';
 import { getCategories } from './store/app/asyncAction';
 import Cart from './components/products/Cart';
+import { showCart } from 'store/app/appSlice';
 
 function App() {
     const { isShowCart } = useSelector((state) => state.app);
@@ -33,7 +35,7 @@ function App() {
     return (
         <div className="min-h-screen font-main relative">
             {isShowCart && (
-                <div className="absolute inset-0 bg-overlay z-50 flex justify-end">
+                <div onClick={() => dispatch(showCart())} className="absolute inset-0 bg-overlay z-50 flex justify-end">
                     <Cart />
                 </div>
             )}
@@ -48,6 +50,7 @@ function App() {
                     <Route path={path.FAQs} element={<FAQ />} />
                     <Route path={path.OUR_SERVICES} element={<Services />} />
                     <Route path={path.PRODUCTS} element={<Products />} />
+                    <Route path={path.DETAIL_CART} element={<DetailCart />} />
                     <Route path={path.ALL} element={<Home />} />
                 </Route>
                 <Route path={path.ADMIN} element={<AdminLayout />}>

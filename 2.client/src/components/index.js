@@ -4,6 +4,7 @@ export { default as Banner } from './common/Banner';
 export { default as Navigation } from './navigation/Navigation';
 export { default as BestSeller } from './products/BestSeller';
 export { default as Product } from './products/Product';
+export { default as OrderItem } from './products/OrderItem';
 export { default as QuickView } from './products/QuickView';
 export { default as SelectOption } from './search/SelectOption';
 export { default as DealDaily } from './products/DealDaily';

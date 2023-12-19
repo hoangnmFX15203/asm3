@@ -35,7 +35,13 @@ const { response } = require('express');
 exports.getUser = async (req, res) => {
     const { _id } = req.user;
     try {
-        const user = await User.findById(_id).select('-refreshToken -password');
+        const user = await User.findById(_id).select('-refreshToken -password').populate({
+            path: 'cart',
+            populate: {
+                path: 'product',
+                select: 'title thumb price'
+            }
+        });
         // console.log(user);
         // const { password, ...other } = user._doc;
         res.status(200).json({
@@ -192,7 +198,7 @@ exports.updateUserAddress = async (req, res) => {
 };
 
 exports.updateCart = async (req, res) => {
-    const { pid, quantity = 1, color } = req.body;
+    const { pid, quantity = 1, color, price } = req.body;
     const { _id } = req.user;
     if (!pid) return res.status(401).json('Missing Input');
     const user = await User.findById(_id).select('cart');
@@ -205,7 +211,7 @@ exports.updateCart = async (req, res) => {
             {
                 cart: { $elemMatch: alreadyProduct },
             },
-            { $set: { 'cart.$.quantity': quantity, 'cart.$.color': color } },
+            { $set: { 'cart.$.quantity': quantity, 'cart.$.color': color, price: 'cart.$.price' } },
             { new: true },
         );
         return res.status(200).json({
@@ -216,7 +222,7 @@ exports.updateCart = async (req, res) => {
         response = await User.findByIdAndUpdate(
             _id,
             {
-                $push: { cart: { product: pid, quantity, color } },
+                $push: { cart: { product: pid, quantity, color, price } },
             },
             { new: true },
         );

@@ -25,14 +25,7 @@ const Product = ({ productData, isNew, normal, navigate }) => {
         if (flag === 'CART') {
             if (!current) {
                 return toast.info('Please Login First');
-                // Swal.fire({
-                //     title: 'Almost...',
-                //     text: 'Please Login first!',
-                //     icon: 'info',
-                //     cancelButtonText: 'Not now!',
-                //     showCancelButton: true,
-                //     confirmButtonText: 'Go login page'
-                // })
+                
             }
             const response = await apiUpdateCart({
                 pid: productData._id,

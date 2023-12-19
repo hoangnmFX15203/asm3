@@ -7,11 +7,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from 'store/user/userSlice';
 import { BsCartCheckFill } from 'react-icons/bs';
 import withBaseComponent from './../../hocs/withBaseComponent';
-import { showCart } from 'store/app/appSlice';
+import {showCart}  from 'store/app/appSlice';
 
 const { BsFillTelephoneFill, MdEmail, FaUser, BsBagPlusFill } = icons;
-const Header = () => {
-    const dispatch = useDispatch();
+const Header = ({dispatch}) => {
     const [isShowOption, setIsShowOption] = useState(false);
     const { current } = useSelector((state) => state.user);
     // const handleRole = () => {

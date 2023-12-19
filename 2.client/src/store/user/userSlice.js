@@ -23,6 +23,10 @@ export const userSlice = createSlice({
             state.current = null;
             state.isAdmin = null;
         },
+        updateCart: (state, action) => {
+            state.current = action.payload;
+            console.log(action.payload)
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(actions.getCurrent.pending, (state) => {
@@ -41,6 +45,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, updateCart } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -8,7 +8,7 @@ import {
     ProductInfomation,
     CustomSlider,
 } from '../../components';
-import { apiGetProduct, apiGetProducts } from '../../apis';
+import { apiGetProduct, apiGetProducts, apiUpdateCart } from '../../apis';
 import Slider from 'react-slick';
 import ReactImageMagnify from 'react-image-magnify';
 import {
@@ -18,6 +18,10 @@ import {
 } from '../../ultils/helpers';
 import { productExtraInfomation } from '../../ultils/constant';
 import DOMPurify from 'dompurify';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { getCurrent } from 'store/user/asyncAction';
+import withBaseComponent from 'hocs/withBaseComponent';
 
 const settings = {
     dots: false,
@@ -27,7 +31,8 @@ const settings = {
     slidesToScroll: 1,
 };
 
-const DetailProduct = ({ isQuickView }) => {
+const DetailProduct = ({ isQuickView, dispatch }) => {
+    const {current} = useSelector(state => state.user)
     const { pid, title, categories } = useParams();
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
@@ -69,6 +74,23 @@ const DetailProduct = ({ isQuickView }) => {
         },
         [quantity],
     );
+
+    const handleAddToCart = async () => {
+        if (!current) {
+            return toast.info('Please Login First');
+            
+        }
+        const response = await apiUpdateCart({
+            pid: pid,
+            color: product?.color,
+            quantity: quantity,
+            price: product?.price,
+        });
+        if (response.data.success) {
+            toast.success(response.data.mes);
+            dispatch(getCurrent());
+        } else toast.error(response.data.mes);
+    }
     return (
         <div className="w-full">
             {!isQuickView && (
@@ -156,7 +178,7 @@ const DetailProduct = ({ isQuickView }) => {
                                 handleChangeQuantity={handleChangeQuantity}
                             />
                         </div>
-                        <Button name={'Add to Cart'} fw>
+                        <Button name={'Add to Cart'} fw handleOnclick={handleAddToCart}>
                             Add to cart
                         </Button>
                     </div>
@@ -196,4 +218,4 @@ const DetailProduct = ({ isQuickView }) => {
     );
 };
 
-export default DetailProduct;
+export default withBaseComponent(DetailProduct);

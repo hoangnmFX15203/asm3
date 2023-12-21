@@ -1,13 +1,14 @@
+import { apiUpdateCart } from 'apis';
 import SelectQuantity from 'components/common/SelectQuantity';
+import withBaseComponent from 'hocs/withBaseComponent';
 import React, {useState, useCallback, useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getCurrent } from 'store/user/asyncAction';
 import { updateCart } from 'store/user/userSlice';
 import { formatMoney } from 'ultils/helpers';
 
-const OrderItem = ({el}) => {
-    const [quantity, setQuantity] = useState(1)
-    const dispatch = useDispatch()
-    const {current } = useSelector(state => state.user)
+const OrderItem = ({el, defaultQuantity = 1, dispatch}) => {
+    const [quantity, setQuantity] = useState(() => defaultQuantity)
     
     const handleQuantity = (number) => {
         if (+number > 1) setQuantity(number)
@@ -19,13 +20,10 @@ const OrderItem = ({el}) => {
         if (flag === 'plus') setQuantity(prev => +prev + 1)
     }
 
-    useEffect(() => {
-        let currentCart = current.cart.find(item => item._id === el._id)
-        currentCart = {...currentCart, quantity}
-        const newCurrent = {...current, cart: currentCart}
-        console.log(newCurrent)
-        dispatch(updateCart(newCurrent))
+    useEffect(() => {        
+        dispatch(updateCart({pid: el.product?._id, quantity}))
     }, [quantity])
+
     return <div className='w-main mx-auto font-bold grid py-3 grid-cols-10 border-b' key={el._id}>
     <span className='col-span-6 w-full text-center'>
     <div className='flex gap-2 px-4 py-2'>
@@ -51,4 +49,4 @@ const OrderItem = ({el}) => {
 </div>
 }
 
-export default OrderItem
+export default withBaseComponent(OrderItem)

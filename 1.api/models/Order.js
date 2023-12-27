@@ -9,12 +9,12 @@ var orderSchema = new mongoose.Schema(
         },
         products: [
             {
-                products: {
-                    type: mongoose.Types.ObjectId,
-                    ref: 'Product',
-                },
-                count: Number,
+                product: { type: mongoose.Types.ObjectId, ref: 'Product' },
+                quantity: Number,
                 color: String,
+                price: Number,
+                title: String,
+                thumbnail: String,
             },
         ],
         total: { type: Number },
@@ -23,8 +23,6 @@ var orderSchema = new mongoose.Schema(
             default: 'Processing',
             enum: ['Cancelled', 'Processing', 'Succeed'],
         },
-
-        paymentIntent: {},
     },
     { timestamps: true },
 );

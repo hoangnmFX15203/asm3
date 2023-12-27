@@ -3,20 +3,13 @@ const User = require('../models/User');
 
 exports.createOrder = async (req, res) => {
     const { _id } = req.user;
-    const userCart = await User.findById(_id)
-        .select('cart')
-        .populate('cart.product', 'title price');
-    console.log(userCart.cart);
-    const products = userCart?.cart?.map((el) => ({
-        product: el.product._id,
-        count: el.quantity,
-        color: el.color,
-    }));
-    let total = userCart?.cart?.reduce(
-        (sum, el) => el.product.price * el.quantity + sum,
-        0,
-    );
-    const rs = await Order.create({ products, total, orderBy: _id });
+    const {products,total, address} = req.body;
+    console.log(req.body)
+    if (address) {
+        await User.findByIdAndUpdate(_id, {address, cart: []})
+    }
+    
+    const rs = await Order.create({ products, total, orderBy: _id, status: 'Processing' });
     return res.json({
         success: rs ? true : false,
         rs: rs ? rs : 'Something went wrong',

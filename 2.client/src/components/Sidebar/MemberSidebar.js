@@ -95,6 +95,7 @@ const MemberSidebar = () => {
                     );
                 })}
             </div>
+            <NavLink to={'/'} className={clsx(notActiveStyle)}>Go Home</NavLink>
         </div>
     );
 };

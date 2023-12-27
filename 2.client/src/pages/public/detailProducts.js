@@ -53,6 +53,7 @@ const DetailProduct = ({ isQuickView, dispatch }) => {
             fetchProductData();
             fetchProducts();
         }
+        window.scrollTo(0, 0)
     }, [pid]);
 
     const handleQuantity = useCallback(

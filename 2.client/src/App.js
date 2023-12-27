@@ -19,7 +19,7 @@ import {
     ManageProducts,
     ManageUser,
 } from './pages/admin';
-import { MemberLayout, Personal, History, MyCart } from './pages/member';
+import { MemberLayout, Personal, History, MyCart, Checkout } from './pages/member';
 import { StaffLayout } from './pages/staff';
 import path from './ultils/path';
 import { getCategories } from './store/app/asyncAction';
@@ -40,6 +40,7 @@ function App() {
                 </div>
             )}
             <Routes>
+                    <Route path={path.CHECKOUT} element={<Checkout />} />
                 <Route path={path.PUBLIC} element={<Public />}>
                     <Route path={path.HOME} element={<Home />} />
 
@@ -68,7 +69,7 @@ function App() {
                 </Route>
                 <Route path={path.MEMBER} element={<MemberLayout />}>
                     <Route path={path.PERSONAL} element={<Personal />} />
-                    <Route path={path.MY_CART} element={<MyCart />} />
+                    <Route path={path.MY_CART} element={<DetailCart />} />
                     <Route path={path.HISTORY} element={<History />} />
                 </Route>
                 <Route path={path.STAFF} element={<StaffLayout />}>

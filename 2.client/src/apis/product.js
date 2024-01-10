@@ -39,3 +39,16 @@ export const apiCreateOrder = (data) =>
         method: 'post',
         data
     });
+
+export const apiConfirmOrder = () =>
+    axios({
+        url: '/order/',
+        method: 'get',        
+    });
+
+export const apiGetUserOrders = (params) =>
+    axios({
+        url: '/order/',
+        method: 'get',
+        params    
+    });

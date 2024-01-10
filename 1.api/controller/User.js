@@ -146,7 +146,7 @@ exports.deleteUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     const { _id } = req.user;
-    const { firstname, lastname, email, mobile } = req.body;
+    const { firstname, lastname, email, mobile, address } = req.body;
     if (!_id || Object.keys(req.body).length === 0)
         return res.status(401).json('Missing Input');
     const response = await User.findByIdAndUpdate(
@@ -156,6 +156,7 @@ exports.updateUser = async (req, res) => {
             lastname,
             email,
             mobile,
+            address,
         },
         {
             new: true,

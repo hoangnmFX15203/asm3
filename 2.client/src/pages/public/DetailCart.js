@@ -7,7 +7,10 @@ import { formatMoney } from 'ultils/helpers';
 import path from 'ultils/path';
 
 const DetailCart = ({location, dispatch}) => {
-    const { currentCart } = useSelector(state => state.user)
+    const { currentCart, current } = useSelector(state => state.user)
+    const handleSubmit = () => {
+        window.open(`/${path.CHECKOUT}`, '_blank')
+    }
     
     
 
@@ -32,7 +35,8 @@ const DetailCart = ({location, dispatch}) => {
                     <span className='text-main font-bold'>{`${formatMoney(currentCart?.reduce((sum, el) => +el.product?.price*el.quantity + sum, 0))} VND`}</span>
                     </span>
                     <span className='text-xs italic'>Shipping, taxes, and discounts calculated at checkout.</span>
-                    <Link target='blank' to={`/${path.CHECKOUT}`} className='text-white bg-main rounded-md px-2 py-2'>Checkout</Link>
+                    <Button name='Check out' handleOnclick={handleSubmit}></Button>
+                    {/* <Link target='blank' to={`/${path.CHECKOUT}`} className='text-white bg-main rounded-md px-2 py-2'>Checkout</Link> */}
                 </div>
             </div>
 }

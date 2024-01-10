@@ -166,3 +166,22 @@ export const memberSidebar = [
         icon: <RiBillLine />,
     },
 ];
+
+export const statusOrder = [
+    {
+        label: 'Cancelled',
+        value: 'Cancelled'
+    },
+    {
+        label: 'Processing',
+        value: 'Processing'
+    },
+    {
+        label: 'Confirmed',
+        value: 'Confirmed'
+    },
+    {
+        label: 'Succeed',
+        value: 'Succeed'
+    },
+]

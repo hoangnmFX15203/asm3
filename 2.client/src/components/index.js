@@ -16,6 +16,7 @@ export { default as CustomSlider } from './common/CustomSlider';
 export { default as TopHeader } from './header/TopHeader';
 export { default as Footer } from './footer/Footer';
 export { default as InputField } from './input/InputField';
+export { default as CustomSelect } from './input/CustomSelect';
 export { default as Breadcrumbs } from './common/Breadcrumbs';
 export { default as Button } from './buttons/Button';
 export { default as SelectQuantity } from './common/SelectQuantity';

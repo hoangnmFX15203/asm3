@@ -36,7 +36,7 @@ const Personal = () => {
         }
     };
     return (
-        <div className="w-full relative p-4">
+        <div className="w-full relative px-4">
             <header className="text-3xl font-semibold py-4 border-b-blue-200">
                 Personal
             </header>

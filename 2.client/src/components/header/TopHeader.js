@@ -11,16 +11,26 @@ const { AiOutlineLogout } = icons;
 const TopHeader = () => {
     const dispatch = useDispatch();
     const { isLoggedIn, current, isAdmin } = useSelector((state) => state.user);
+
     useEffect(() => {
-        if (isLoggedIn) dispatch(getCurrent());
+        const fetchData = async () => {
+            if (isLoggedIn) {
+                await dispatch(getCurrent());
+            }
+        };
+        fetchData();
     }, [dispatch, isLoggedIn]);
+
+    useEffect(() => {
+        console.log(current);
+    }, [current]);
     return (
         <div className="h-[38px] w-full bg-main flex items-center justify-center">
             <div className="w-main flex items-center justify-between text-xs text-white">
                 <span>ORDER ONLINE OR CALL US (+1800) 000 8808</span>
                 {isLoggedIn ? (
                     <div className="flex gap-2 text-sm items-center">
-                        <small>
+                        <small className="flex items-center justify-center">
                             <span>{`Welcome, ${current?.lastname} ${current?.firstname}`}</span>
                             <span
                                 className="hover:rounded-full hover:bg-gray-200 p-2 hover:text-main cursor-pointer"

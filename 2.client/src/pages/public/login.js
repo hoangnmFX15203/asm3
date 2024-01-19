@@ -43,7 +43,6 @@ const Login = () => {
             });
         } else {
             const rs = await apiLogin(data);
-            console.log(rs);
             if (rs.data.success) {
                 dispatch(
                     login({
@@ -53,8 +52,9 @@ const Login = () => {
                         isAdmin: rs.data.isAdmin,
                     }),
                 );
-
-                navigate(`/${path.HOME}`);
+                setTimeout(() => {
+                    navigate(`/${path.HOME}`);
+                }, 100);
             } else Swal.fire('OoopS!', rs.data.mess, 'error');
         }
     }, [payload, isRegister]);

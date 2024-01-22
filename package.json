@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start-api\" \"npm run start-client\"",
-    "start-api": "cd 1.api && npm start",
-    "start-client": "cd 2.client && npm start"
+    "start-api": "cd 1.api && npm start --prefix",
+    "start-client": "cd 2.client && npm start --prefix"
   }
 }

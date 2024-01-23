@@ -5,6 +5,7 @@ const { generateToken, generateRefreshToken } = require('../middleware/jwt');
 
 exports.register = async function (req, res) {
     const { username, email, password, firstname, lastname } = req.body;
+    console.log(req.body);
     if (!username || !email || !password || !firstname || !lastname) {
         return res.status(400).json({ mess: 'missing input', success: false });
     }

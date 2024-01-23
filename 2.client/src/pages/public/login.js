@@ -33,10 +33,11 @@ const Login = () => {
         const { firstName, lastname, email, mobile, ...data } = payload;
         if (isRegister) {
             const response = await apiRegister(payload);
+            console.log(response)
             Swal.fire(
-                response.success ? 'Congulation' : 'Ooop!',
-                response.message,
-                response.success ? 'success' : 'error',
+                response.data.success ? 'Congulation' : 'Ooop!',
+                response.data.message,
+                response.data.success ? 'success' : 'error',
             ).then(() => {
                 setIsRegister(false);
                 resetPayload();
